@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use('/api/auth/users', userRouter);
 
 app.all('*', function (req, res, next) {
-	next(ErrorClass(`can't find ${req.originalUrl}, please check your url`, 401));
+	next(ErrorClass(`can't find ${req.originalUrl}, please check your url`, 404));
 });
 
 app.use(errorHandlerHelper);

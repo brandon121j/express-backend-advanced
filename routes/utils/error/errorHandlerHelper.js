@@ -1,3 +1,5 @@
+const ErrorClass = require("./ErrorClass");
+
 function handleCastErrorDB(err) {
 	const message = `Invalid ${err.path}: ${err.value}.`;
 	return new ErrorClass(message, 400);
@@ -57,6 +59,8 @@ function sendErrorProd(err, req, res) {
 }
 
 function erroHandlerFunction(err, req, res) {
+
+	
 	err.statusCode = err.statusCode || 500;
 
 	if (process.env.NODE_ENV === 'development') {

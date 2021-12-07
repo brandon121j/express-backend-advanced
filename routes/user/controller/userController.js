@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../model/User');
 const ErrorClass = require('../../utils/error/ErrorClass');
 
-async function createUser(req, res) {
+async function createUser(req, res, next) {
 	try {
 		let salt = await bcrypt.genSalt(12);
 
