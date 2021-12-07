@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const User = require('../model/User');
+const ErrorClass = require('../../utils/error/ErrorClass');
 
 async function createUser(req, res) {
 	try {
@@ -16,9 +17,9 @@ async function createUser(req, res) {
 			phone: req.body.phone,
 		});
 
-        let hashedPassword = await bcrypt.hash(req.body.password, salt);
+		let hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-        createdUser.password = hashedPassword;
+		createdUser.password = hashedPassword;
 
 		let savedUser = await createdUser.save();
 
@@ -27,8 +28,8 @@ async function createUser(req, res) {
 			savedUser: savedUser,
 		});
 	} catch (err) {
-		res.status(500).json({ message: 'error', err });
-		//return next(ErrorClass(err));
+		// res.status(500).json({ message: 'error', err });
+		return next(ErrorClass(err));
 	}
 }
 
